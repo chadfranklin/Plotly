@@ -1,0 +1,31 @@
+---
+title: "Illinois"
+subtitle: "February 12, 2019"
+author: "Chad Franklin"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+This presentation demonstrates the use of Plotly by using data from GADM, the Database of Global Administrative Areas. We specifically looked at data for Illinois, one of the states within the United States.
+
+```{r load, error=FALSE, message=FALSE, warning=FALSE}
+library(sp)
+library(plotly)
+
+df1 <- readRDS(url("https://biogeo.ucdavis.edu/data/gadm3.6/Rsp/gadm36_USA_1_sp.rds"))
+
+illinois <- data.frame(df1@polygons[[which(df1@data$NAME_1 == "Illinois")]]@Polygons[[1]]@coords)
+```
+
+## Plot of Illinois
+
+```{r plot, echo=FALSE, error=FALSE, message=FALSE, warning=FALSE}
+
+plot_ly(x = illinois$x, y = illinois$y, mode = "markers")
+
+```
